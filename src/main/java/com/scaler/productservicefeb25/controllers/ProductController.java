@@ -34,9 +34,13 @@ public class ProductController
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable("id") Long id)
     {
-        Product product= productService.getProductById(id);
-        return new ResponseEntity<>(
+        System.out.println("Bhanu Prakash Raju ");
+       Product product= productService.getProductById(id);
+
+
+       return new ResponseEntity<>(
                 product, HttpStatus.NOT_FOUND);// OK
+
     }
 
     // http://localhost:8080/Products

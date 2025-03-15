@@ -57,11 +57,13 @@ public class FakeStoreProductService implements ProductService
 
        // RestTemplate restTemplate = new RestTemplate();
 
-       FakeStoreProductDto fakeStoreProductDto=restTemplate.getForObject("https://fakestoreapi.com/products/" +productId,
-               FakeStoreProductDto.class);// output converst into or object
-        // Convert FakeStoreProdcutDto  object into a Product Object.
+        throw new RuntimeException("Something Went Wrong By Bhanu");
 
-        return convertFakeStoreDtoToProduct(fakeStoreProductDto);
+//       FakeStoreProductDto fakeStoreProductDto=restTemplate.getForObject("https://fakestoreapi.com/products/" +productId,
+//               FakeStoreProductDto.class);// output converst into or object
+//        // Convert FakeStoreProdcutDto  object into a Product Object.
+//
+//        return convertFakeStoreDtoToProduct(fakeStoreProductDto);
     }
 
     @Override
