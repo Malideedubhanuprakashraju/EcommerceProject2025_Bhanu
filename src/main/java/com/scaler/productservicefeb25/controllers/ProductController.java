@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //Calling 3rd Party APIs Class
@@ -27,6 +28,7 @@ public class ProductController
         this.productService = productService;
     }
 
+    // http://loacalhost:8080/Products/1 => GET
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable("id") Long id)
     {
@@ -34,9 +36,12 @@ public class ProductController
         return singleProduct;
     }
 
+    // http://localhost:8080/Products
+    @GetMapping()
     public List<Product> getAllProducts()
     {
-        return null;
+
+        return productService.getAllProducts();
     }
 
 }
