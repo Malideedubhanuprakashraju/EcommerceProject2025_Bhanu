@@ -11,7 +11,7 @@ public class ProductServiceFeb25Application
     {
         SpringApplication.run(ProductServiceFeb25Application.class, args);
 
-        System.out.println("Hello World");
+
     }
 
 }
