@@ -1,6 +1,7 @@
 package com.scaler.productservicefeb25.services;
 
 import com.scaler.productservicefeb25.dto.FakeStoreProductDto;
+import com.scaler.productservicefeb25.exceptions.ProductNotFoundException;
 import com.scaler.productservicefeb25.models.Category;
 import com.scaler.productservicefeb25.models.Product;
 import org.springframework.stereotype.Service;
@@ -48,8 +49,7 @@ public class FakeStoreProductService implements ProductService
 
 
     @Override
-    public Product getProductById(Long productId)
-    {
+    public Product getProductById(Long productId) throws ProductNotFoundException {
         // Make a API call to fake store and get the product with the given id;
         // web call make
         // http call
@@ -57,13 +57,19 @@ public class FakeStoreProductService implements ProductService
 
        // RestTemplate restTemplate = new RestTemplate();
 
-        throw new RuntimeException("Something Went Wrong By Bhanu");
+       // throw new RuntimeException("Something Went Wrong By Bhanu");
 
-//       FakeStoreProductDto fakeStoreProductDto=restTemplate.getForObject("https://fakestoreapi.com/products/" +productId,
-//               FakeStoreProductDto.class);// output converst into or object
-//        // Convert FakeStoreProdcutDto  object into a Product Object.
-//
-//        return convertFakeStoreDtoToProduct(fakeStoreProductDto);
+       FakeStoreProductDto fakeStoreProductDto=restTemplate.getForObject("https://fakestoreapi.com/products/" +productId,
+               FakeStoreProductDto.class);// output converst into or object
+        // Convert FakeStoreProdcutDto  object into a Product Object.
+
+        // Custom Exceptions creating
+        if(fakeStoreProductDto==null)
+        {
+            throw  new ProductNotFoundException("Product with id :"+productId+" doesn't exit");
+        }
+
+        return convertFakeStoreDtoToProduct(fakeStoreProductDto);
     }
 
     @Override
