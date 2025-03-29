@@ -5,6 +5,7 @@ import com.scaler.productservicefeb25.exceptions.ProductNotFoundException;
 import com.scaler.productservicefeb25.models.Product;
 import com.scaler.productservicefeb25.services.FakeStoreProductService;
 import com.scaler.productservicefeb25.services.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class ProductController
 
     // Dependecy Injection Who Implemented This Interaface....
 
-    public ProductController(ProductService productService) // Dependecy Inject via Constructor
+    public ProductController(@Qualifier("selfProductService") ProductService productService) // Dependecy Inject via Constructor
     {
         this.productService = productService;
     }

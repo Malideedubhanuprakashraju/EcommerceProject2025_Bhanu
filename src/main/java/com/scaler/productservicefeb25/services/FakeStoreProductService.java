@@ -16,7 +16,7 @@ import java.util.List;
 // How to Create Instance Objects ask Spring
 
 
-@Service   //Make It Special Class -------------------- Hey Spring pls create object of This class while implementig project
+@Service ("fakeStoreProductService")  //Make It Special Class -------------------- Hey Spring pls create object of This class while implementig project
 public class FakeStoreProductService implements ProductService
 {
     // This service Implementation uses FakeStore to Fetch Products from FakeStore
