@@ -45,4 +45,7 @@ public class Category extends BaseModel
  {
      private String name;
 
+     @OneToMany(mappedBy = "category")// It can only be present in OneToMany Side.
+     private List<Product> products;
+
  }
