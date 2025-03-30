@@ -17,6 +17,8 @@ import java.util.List;
 
 @RestController     // Hosting Web Application ,To Host HTTP rest APIs
 @RequestMapping("/Products")
+//@RequestMapping("/Product")
+
 public class ProductController
 {
     //Interafce
@@ -58,17 +60,49 @@ public class ProductController
 
     // http://localhost:8080/Products
     // http://localhost:8080/Products/20
+
+//    @PostMapping()
+//    public Product createProduct(@RequestBody Product product) throws ProductNotFoundException {
+//        return productService.createProduct(product);
+//    }
     @GetMapping()
     public List<Product> getAllProducts()
     {
-
         return productService.getAllProducts();
     }
+
+    @PostMapping()
+    public Product createproduct(@RequestBody Product product)
+    {
+        return productService.createProduct(product);
+
+    }
+    @PutMapping("/{id}")
+    public Product replaceProduct(@PathVariable("id") Long productId, @RequestBody Product product) throws ProductNotFoundException {
+        return productService.replaceProduct(productId,product);
+    }
+
+
+
+
+
+
+
+
     // Write exception handle in controller as well
     @ExceptionHandler(ProductNotFoundException.class)
     public ResponseEntity<String> handleProductNotFoundException(ProductNotFoundException ex)
     {
         return  new ResponseEntity<>(ex.getMessage(), HttpStatus.SERVICE_UNAVAILABLE);
     }
+
+//    @PostMapping()
+//    public Product craeteProduct(@RequestBody Product product)
+//    {
+//        return productService.createProduct(product);
+//    }
+
+
+
 
 }

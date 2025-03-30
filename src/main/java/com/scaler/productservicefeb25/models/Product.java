@@ -2,9 +2,7 @@ package com.scaler.productservicefeb25.models;
 //Calling  bY 3RD pARTY
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +13,7 @@ import lombok.Setter;
 @Entity(name = "products") //@Entity(name="products") user defined Name To Database table
 public class Product extends BaseModel
 {
-   // private  long id;
+
     private String title;
     private String description;
     private  String imageUrl;
@@ -23,16 +21,9 @@ public class Product extends BaseModel
 
     @ManyToOne
     private Category category;
-    @Id
-    private Long id;
+    //private Category category;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public Long getId() {
-        return id;
-    }
 
     /*
     1               1

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-@Repository
+@Repository //Refrenece to call methods of this Interface
 public interface ProductRepository extends JpaRepository<Product,Long>
 {
     @Override
@@ -25,22 +25,12 @@ public interface ProductRepository extends JpaRepository<Product,Long>
 
     Optional<Product> findByCategory(Category category);
 
-    Optional<Product> findByCategory_Id(long categoryId);
+    Optional<Product> findByCategory_Id(Long categoryId);
 
+    Product save(Product product);
+
+    @Override
+    void deleteById(Long aLong);
 }
-//@Repository
-//public interface ProductRepository extends JpaRepository<Product, Long> {
-//
-//    @Override
-//    Optional<Product> findById(Long productId);
-//
-//    @Override
-//    List<Product> findAll();
-//
-//    Optional<Product> findByTitleContains(String str);
-//
-//    Optional<Product> findByCategory(Category category);
-//
-//    Optional<Product> findByCategoryId(Long categoryId); // Fixed method name
-//}
+
 

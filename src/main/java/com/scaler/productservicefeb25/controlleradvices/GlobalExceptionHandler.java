@@ -16,11 +16,11 @@ public class GlobalExceptionHandler
                 exception.getMessage(),
                 HttpStatus.BAD_GATEWAY);
     }
-    @ExceptionHandler(Exception.class)
-    public  void  handleArrayIndexOutOfBound()
-    {
-
-    }
+//    @ExceptionHandler(Exception.class)
+//    public  void  handleArrayIndexOutOfBound()
+//    {
+//
+//    }
 //    @ExceptionHandler(Exception.class)
 //    public void handleException()
 //    {
