@@ -99,5 +99,10 @@ public class FakeStoreProductService implements ProductService
         return null;
     }
 
+    @Override
+    public void deleteProduct(Long id) throws ProductNotFoundException {
+
+    }
+
 
 }
