@@ -43,7 +43,7 @@ import java.util.List;
 @Entity(name= "categories")
 public class Category extends BaseModel
  {
-     @Column(unique = true)
+     @Column(nullable=false ,unique = true)
      private String name;
 
      @OneToMany(mappedBy = "category", cascade = {CascadeType.REMOVE},fetch = FetchType.EAGER)// It can only be present in OneToMany Side.
