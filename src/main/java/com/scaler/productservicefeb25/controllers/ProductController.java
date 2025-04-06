@@ -82,6 +82,12 @@ public class ProductController
         return productService.replaceProduct(productId,product);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable("id") Long id) throws ProductNotFoundException
+    {
+        productService.deleteProduct(id);
+    }
+
 
 
 

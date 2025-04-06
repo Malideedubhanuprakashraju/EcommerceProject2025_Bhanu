@@ -19,7 +19,7 @@ public class Product extends BaseModel
     private  String imageUrl;
     private double price;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REMOVE,CascadeType.PERSIST,CascadeType.ALL})
     private Category category;
     //private Category category;
 

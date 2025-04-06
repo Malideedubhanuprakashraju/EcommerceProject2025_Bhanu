@@ -23,3 +23,5 @@ class ProductServiceFeb25ApplicationTests {
         }
     }
 }
+// if u installed java in system
+// java -jar file.jar(External Jar File)
