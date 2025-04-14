@@ -19,7 +19,11 @@ public class Product extends BaseModel
     private  String imageUrl;
     private double price;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE,CascadeType.PERSIST,CascadeType.ALL})// default eager
+    //@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})// default eager
+
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn
     private Category category;
     //private Category category;
 

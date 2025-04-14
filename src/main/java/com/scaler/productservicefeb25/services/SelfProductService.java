@@ -5,12 +5,12 @@ import com.scaler.productservicefeb25.models.Category;
 import com.scaler.productservicefeb25.models.Product;
 import com.scaler.productservicefeb25.repositories.CategoryRepository;
 import com.scaler.productservicefeb25.repositories.ProductRepository;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.context.annotation.Primary;
+//import org.hibernate.query.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.data.domain.Page;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -62,11 +62,16 @@ public class SelfProductService implements ProductService
 
     }
 
-    @Override
-    public List<Product> getAllProducts()
-    {
+//    @Override
+//    public List<Product> getAllProducts() {
+//        return List.of();
+//    }
 
-        return productRepository.findAll();
+    @Override
+    public Page<Product> getAllProducts(int pageNumber, int pageSize)
+    {
+        Sort sort=Sort.by("imageUrl").descending().and(Sort.by("price").ascending());
+        return productRepository.findAll(PageRequest.of(pageNumber,pageSize, sort));
     }
 
     @Override

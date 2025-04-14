@@ -6,6 +6,7 @@ import com.scaler.productservicefeb25.models.Product;
 import com.scaler.productservicefeb25.services.FakeStoreProductService;
 import com.scaler.productservicefeb25.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -66,9 +67,9 @@ public class ProductController
 //        return productService.createProduct(product);
 //    }
     @GetMapping()
-    public List<Product> getAllProducts()
+    public Page<Product> getAllProducts(@RequestParam("pageNumber") int pageNumber,@RequestParam("pageSize") int pageSize)
     {
-        return productService.getAllProducts();
+        return productService.getAllProducts(pageNumber,pageSize);
     }
 
     @PostMapping()

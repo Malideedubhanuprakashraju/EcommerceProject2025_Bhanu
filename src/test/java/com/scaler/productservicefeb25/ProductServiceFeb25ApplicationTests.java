@@ -14,11 +14,11 @@ import java.util.Optional;
 
 @SpringBootTest
 class ProductServiceFeb25ApplicationTests {
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
+//    @Autowired
+//    private ProductRepository productRepository;
+//
+//    @Autowired
+//    private CategoryRepository categoryRepository;
 
     @Test
     void contextLoads() {
@@ -29,7 +29,7 @@ class ProductServiceFeb25ApplicationTests {
 //            System.out.println(product.getTitle() + " -> " + product.getPrice());
 //        }
         // Eager Fetch
-        Optional<Product> optionalProduct = productRepository.findById(10L);
+      //  Optional<Product> optionalProduct = productRepository.findById(10L);
        // System.out.println(optionalProduct.get());
 
         // Lazy Fetch
