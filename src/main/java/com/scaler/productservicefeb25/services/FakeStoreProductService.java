@@ -6,6 +6,7 @@ import com.scaler.productservicefeb25.models.Category;
 import com.scaler.productservicefeb25.models.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,10 +25,12 @@ public class FakeStoreProductService implements ProductService
     // This service Implementation uses FakeStore to Fetch Products from FakeStore
 
     private  RestTemplate restTemplate; //we can use any name for reff
+    private RedisTemplate<String,Object> redisTemplate;
 
-    public FakeStoreProductService(RestTemplate restTemplate)
+    public FakeStoreProductService(RestTemplate restTemplate,RedisTemplate<String,Object> redisTemplate)
     {
         this.restTemplate = restTemplate;
+        this.redisTemplate = redisTemplate;
     }
 
     private Product convertFakeStoreDtoToProduct(FakeStoreProductDto fakeStoreProductDto)
@@ -61,6 +64,17 @@ public class FakeStoreProductService implements ProductService
 
        // throw new RuntimeException("Something Went Wrong By Bhanu");
 
+        // First Check in The Redis if the product with the given id is present or not.
+
+        Product product=(Product) redisTemplate.opsForHash().get("PRODUCTS","PRODUCT_"+productId);
+
+       // Cache HIT
+       if(product!=null)
+       {
+           return product;
+       }
+
+       //Cache MISS
        FakeStoreProductDto fakeStoreProductDto=restTemplate.getForObject("https://fakestoreapi.com/products/" +productId,
                FakeStoreProductDto.class);// output converst into or object
         // Convert FakeStoreProdcutDto  object into a Product Object.
@@ -71,7 +85,13 @@ public class FakeStoreProductService implements ProductService
             throw  new ProductNotFoundException("Product with id :"+productId+" doesn't exit");
         }
 
-        return convertFakeStoreDtoToProduct(fakeStoreProductDto);
+        product=convertFakeStoreDtoToProduct(fakeStoreProductDto);
+
+
+        // Store this product in the Cache.
+        redisTemplate.opsForHash().put("PRODUCTS","PRODUCT_"+productId,product);
+
+        return product;
     }
 
 //    @Override
@@ -95,6 +115,8 @@ public class FakeStoreProductService implements ProductService
 
         return new PageImpl<>(products);
     }
+
+
 
     @Override
     public Product createProduct(Product product) {

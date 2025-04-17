@@ -27,7 +27,7 @@ public class ProductController
 
     // Dependecy Injection Who Implemented This Interaface....
 
-    public ProductController(@Qualifier("selfProductService") ProductService productService) // Dependecy Inject via Constructor
+    public ProductController(@Qualifier("fakeStoreProductService") ProductService productService) // Dependecy Inject via Constructor
     {
         this.productService = productService;
     }
